@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
@@ -20,10 +22,11 @@ public class Product {
     private Category category;
     private String name;
     private String barcode;
-    @Column(nullable = false)
-    private Long quantity;
-    private Long reservedQuantity;
-
+    private Long quantity=0L;
+    private Long reservedQuantity=0L;
+    private byte[] photo;
+    @OneToOne
+    private User createdBy;
 
 
 
