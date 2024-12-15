@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,16 +19,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService{
 
-
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional
     public HttpEntity<?> saveUser(@Valid UserDTO userDTO) {
         try {
             User user = userMapper.toEntity(userDTO);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userRepository.save(user);
             return ResponseEntity.ok(savedUser);
         } catch (Exception e) {

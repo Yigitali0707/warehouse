@@ -34,6 +34,7 @@ public class AuthController {
             );
         }
         catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(403).body("bad attampt");
         }
     }

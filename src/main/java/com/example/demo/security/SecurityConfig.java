@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity security, JwtFilter jwtFilter) throws Exception {
 
         security.authorizeHttpRequests(m->{
-            m.requestMatchers("/swagger-ui/**","/swagger-ui/index.html", "/swagger-ui.html","/api/auth/**").permitAll()
+            m.requestMatchers("api/user/authorize","api/auth/login","/swagger-ui/**","/swagger-ui/index.html", "/swagger-ui.html","/api/auth/**","/v3/api-docs/**").permitAll()
                     .requestMatchers("/api/posts/**").hasRole("ADMIN")
                     .requestMatchers("/api/posts/popular").hasRole("USER")
                     .anyRequest()
@@ -48,13 +49,16 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(){
-        return new ProviderManager(provider());
-    }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

@@ -41,8 +41,8 @@ public class JwtUtil {
     }
 
     private Key getSignKey() {
-        byte[] decode = Decoders.BASE64.decode("1234567891011131123456789101113112345678910111311234567891011131");
-        return Keys.hmacShaKeyFor(decode);
+        byte[] bytes = Decoders.BASE64.decode("a2345678a2345678a2345678a2345678a2345678a2345678a2345678a2345678");
+        return Keys.hmacShaKeyFor(bytes);
     }
 
     public boolean isValid(String token) {

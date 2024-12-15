@@ -8,7 +8,7 @@ import com.example.demo.mapper.ProductMapper;
 import com.example.demo.repo.CategoryRepository;
 import com.example.demo.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @Service
@@ -28,9 +29,9 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final CategoryRepository categoryRepository;
 
-    @SneakyThrows
+
     @Transactional
-    public HttpEntity<?> addProduct(UUID categoryId, String name, String barcode, MultipartFile photo)  {
+    public HttpEntity<?> addProduct(UUID categoryId, String name, String barcode, MultipartFile photo) throws IOException {
         Category category=categoryRepository.findById(categoryId).orElseThrow(()->new RuntimeException("Category Not Found"));
         Product product=new Product();
         product.setCategory(category);
@@ -52,8 +53,8 @@ public class ProductService {
     }
 
 
-    @SneakyThrows
-    public HttpEntity<?> updateProduct(UUID id, String name, String barcode, UUID categoryId, MultipartFile photo) {
+
+    public HttpEntity<?> updateProduct(UUID id, String name, String barcode, UUID categoryId, MultipartFile photo) throws IOException {
         Product product=productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found!"));
         if(name!=null){
           product.setName(name);
