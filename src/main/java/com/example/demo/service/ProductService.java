@@ -55,11 +55,20 @@ public class ProductService {
 
     public Page<ProductDto> getAllProducts(Pageable pageable) {
         Page<Product> products=productRepository.findAll(pageable);
-        System.out.println("Avval:"+products.get());
         Page <ProductDto> productDtos=products.map(productMapper::toDto);
-        System.out.println("Keyin:"+products.get());
         return productDtos;
     }
+
+    public List<ProductDto> categoryProducts(UUID categoryId) {
+        List<Product> products = productRepository.findAllByCategoryId(categoryId);
+        List<ProductDto> productDtos=new ArrayList<>();
+        for (Product product : products) {
+           productDtos.add( productMapper.toDto(product));
+        }
+         return productDtos;
+    }
+
+
 
 
 
@@ -91,4 +100,6 @@ public class ProductService {
         }
         return productDtos;
     }
+
+
 }

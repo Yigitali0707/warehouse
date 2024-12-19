@@ -10,6 +10,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/order")
@@ -29,6 +31,12 @@ public class OrderController {
     public HttpEntity<?> addOrder(@RequestBody OrderDto orderDto){
 
         return ResponseEntity.ok(orderService.addOrder(orderDto));
+    }
+
+
+    @GetMapping("/getCustomerOrders")
+    public HttpEntity<?> getCustomerOrders(UUID customerId){
+        return ResponseEntity.ok(orderService.getCustomerOrderProducts(customerId));
     }
 
 }

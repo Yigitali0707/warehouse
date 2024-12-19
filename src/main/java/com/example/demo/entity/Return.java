@@ -1,39 +1,35 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
-
-
 import java.time.LocalDateTime;
-
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
+@Entity(name = "returns")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class User {
+public class Return {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String firstName;
-    private String lastName;
-    private Integer age;
+    @OneToMany
+    private List<ReturnProduct> returnProducts=new ArrayList<>();
 
-    private String phoneNumber;
-    private String username;
-    private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    @ManyToOne
+    private User createdUser;
+
+    @ManyToOne
+    private Customer customer;
 
     @CreationTimestamp
     @Column(updatable = false)

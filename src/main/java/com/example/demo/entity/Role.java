@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import com.example.demo.entity.enums.RoleName;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
+
 
 import java.util.Objects;
 

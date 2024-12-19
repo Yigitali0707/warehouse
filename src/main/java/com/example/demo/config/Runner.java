@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 
 
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,20 +18,18 @@ public class Runner implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
 
-    private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
-    private final CustomerRepository customerRepository;
-
-    //    private final UserRepository userRepository;
 //    private final RoleRepository roleRepository;
-//
+//    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
+//    private final PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
-        Role role1=new Role(RoleName.ROLE_ADMIN);
-        Role role2=new Role(RoleName.ROLE_CASHIER);
-        roleRepository.save(role1);
-        roleRepository.save(role2);
-
+//        Role role1=new Role(RoleName.ROLE_ADMIN);
+//        Role role2=new Role(RoleName.ROLE_CASHIER);
+//        roleRepository.save(role1);
+//        roleRepository.save(role2);
+//
 //        User user1=User.builder()
 //                .firstName("Yigitali")
 //                .lastName("Dalaboyev")

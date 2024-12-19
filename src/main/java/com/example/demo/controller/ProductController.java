@@ -44,4 +44,9 @@ public class ProductController {
     public HttpEntity<?> findProduct(@RequestParam String name){
         return ResponseEntity.ok(productService.find(name));
     }
+
+    @GetMapping("/categoryProducts")
+    public HttpEntity<?> categoryProducts(UUID categoryId){
+        return ResponseEntity.ok(productService.categoryProducts(categoryId));
+    }
 }
