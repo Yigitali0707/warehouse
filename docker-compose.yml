@@ -1,7 +1,10 @@
+version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: /.
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -12,15 +15,11 @@ services:
       - db
 
   db:
-    image: postgres:15
+    image: postgres:17
+    container_name: postgres_container
     environment:
+      POSTGRES_DB: warehouse
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root123
-      POSTGRES_DB: warehouse
     ports:
       - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-volumes:
-  db_data:
