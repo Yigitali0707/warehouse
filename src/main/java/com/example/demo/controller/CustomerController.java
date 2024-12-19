@@ -27,12 +27,12 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getAllCustomer(pageable));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public HttpEntity<?> addCustomer(@RequestBody CustomerDto customerDto){
         return ResponseEntity.ok(customerService.addCustomer(customerDto));
     }
 
-    @PutMapping
+    @PutMapping("update")
     public HttpEntity<?> updateCustomer(UUID id,@RequestParam(required = false) String firstName,
                                         @RequestParam(required = false) String lastName,
                                         @RequestParam(required = false) Integer age,

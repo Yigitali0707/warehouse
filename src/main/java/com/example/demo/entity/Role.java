@@ -16,19 +16,16 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Table(name = "roles")
-public class Role {
 
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private RoleName roleName;
-
+    private String roleName; // e.g., "ROLE_USER", "ROLE_ADMIN"
 
     public Role(RoleName roleName) {
-        this.roleName = roleName;
+        this.roleName = roleName.toString();
     }
-
 }
 

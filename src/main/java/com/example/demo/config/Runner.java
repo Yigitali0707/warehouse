@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 
 
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,38 +18,38 @@ public class Runner implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
 
-//    private final RoleRepository roleRepository;
-//    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
-//        Role role1=new Role(RoleName.ROLE_ADMIN);
-//        Role role2=new Role(RoleName.ROLE_CASHIER);
-//        roleRepository.save(role1);
-//        roleRepository.save(role2);
-//
-//        User user1=User.builder()
-//                .firstName("Yigitali")
-//                .lastName("Dalaboyev")
-//                .age(23)
-//                .phoneNumber("900242571")
-//                .username("Yigitali")
-//                .password(passwordEncoder.encode("123"))
-//                .roles(List.of(role1,role2))
-//                .build();
-//         User user2=User.builder()
-//                .firstName("Yigitali")
-//                .lastName("Dalaboyev")
-//                .age(23)
-//                .phoneNumber("900242571")
-//                .username("123")
-//                .password(passwordEncoder.encode("123"))
-//                .roles(List.of(role2))
-//                .build();
-//        userRepository.save(user1);
-//        userRepository.save(user2);
+        Role role1=new Role(RoleName.ROLE_ADMIN);
+        Role role2=new Role(RoleName.ROLE_CASHIER);
+        roleRepository.save(role1);
+        roleRepository.save(role2);
+
+        User user1=User.builder()
+                .firstName("Yigitali")
+                .lastName("Dalaboyev")
+                .age(23)
+                .phoneNumber("900242571")
+                .username("Yigitali")
+                .password(passwordEncoder.encode("123"))
+                .roles(List.of(role1,role2))
+                .build();
+         User user2=User.builder()
+                .firstName("Yigitali")
+                .lastName("Dalaboyev")
+                .age(23)
+                .phoneNumber("900242571")
+                .username("123")
+                .password(passwordEncoder.encode("123"))
+                .roles(List.of(role2))
+                .build();
+        userRepository.save(user1);
+        userRepository.save(user2);
 
         Category category1 = categoryRepository.save(Category.builder().name("Category1").build());
         Category category2 = categoryRepository.save(Category.builder().name("Category2").build());
