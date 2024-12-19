@@ -22,7 +22,7 @@ public class ProductController {
     public HttpEntity<?> addProduct(UUID categoryId,
                                     String name, @RequestParam(required = false) String barcode,
                                     @RequestParam(required = false) MultipartFile photo) throws IOException {
-         return productService.addProduct(categoryId,name,barcode,photo);
+         return ResponseEntity.ok(productService.addProduct(categoryId,name,barcode,photo));
     }
 
     @GetMapping
@@ -38,5 +38,10 @@ public class ProductController {
                                        @RequestParam(required = false) UUID categoryId,
                                        @RequestParam(required = false) MultipartFile photo) throws IOException {
         return ResponseEntity.ok(productService.updateProduct(id,name,barcode,categoryId,photo));
+    }
+
+    @GetMapping("/find")
+    public HttpEntity<?> findProduct(@RequestParam String name){
+        return ResponseEntity.ok(productService.find(name));
     }
 }

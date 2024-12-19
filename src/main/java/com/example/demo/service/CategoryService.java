@@ -22,7 +22,6 @@ public class CategoryService {
 
 
     public HttpEntity<?> getAllCategory(Pageable pageable) {
-
         Page<Category> categories = categoryRepository.findAll(pageable);
 
         return ResponseEntity.ok(categories);

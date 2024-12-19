@@ -2,19 +2,21 @@ package com.example.demo.entity;
 
 import com.example.demo.entity.enums.RoleName;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
+import java.util.Objects;
+
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +25,10 @@ public class Role implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
-    @Override
-    public String getAuthority() {
-        return roleName.name();
+
+    public Role(RoleName roleName) {
+        this.roleName = roleName;
     }
+
 }
 

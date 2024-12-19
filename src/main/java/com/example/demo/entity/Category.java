@@ -1,16 +1,17 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "category")
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +22,11 @@ public class Category {
 
     private String name;
     private String description;
+    private byte[] photo;
     @OneToOne
     private User createdBy;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime creationTime;
 }

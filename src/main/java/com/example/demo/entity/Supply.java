@@ -1,35 +1,31 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "supply")
 @Getter
 @Setter
-@ToString
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@Builder
+public class Supply {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @OneToMany
+    private List<SupplyProduct> supplyProducts=new ArrayList<>();
+
     @ManyToOne
-    private Category category;
-    private String name;
-    private String barcode;
-    private Long quantity=0L;
-    private Long reservedQuantity=0L;
-    private byte[] photo;
-    @OneToOne
-    private User createdBy;
+    private User createdUser;
 
     @CreationTimestamp
     @Column(updatable = false)
