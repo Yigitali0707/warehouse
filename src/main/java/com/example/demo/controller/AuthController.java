@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.LoginRequest;
 import com.example.demo.service.UserService;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -16,8 +17,8 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public HttpEntity<?> login(@RequestParam String email, @RequestParam String password) {
-        return userService.login(email,password);
+    public HttpEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        return userService.login(loginRequest.username(),loginRequest.password());
     }
 
 
